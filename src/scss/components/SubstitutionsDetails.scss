@@ -1,0 +1,17 @@
+#substitutionsDetails {
+    position: fixed;
+    overflow: overlay;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background: white;
+    transition: top 100ms ease-out, opacity 100ms ease-out;
+
+    &.hidden {
+        top: 100px;
+        opacity: 0;
+        pointer-events: none;
+    }
+}

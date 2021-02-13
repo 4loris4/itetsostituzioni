@@ -1,0 +1,100 @@
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    transition: opacity 200ms ease;
+    z-index: 100;
+
+    #loaderSpinner {
+        position: absolute;
+        --width: 50px;
+        --height: 50px;
+        stroke: #5dade2;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .spinner {
+        --width: 25px;
+        --height: 25px;
+        --padding: 0px;
+        display: inline-block;
+        position: relative;
+        width: var(--width);
+        height: var(--height);
+        padding: var(--padding);
+        stroke: white;
+
+        svg {
+            position: absolute;
+            animation: rotate 2s linear infinite;
+            transform-origin: center center;
+            width: calc(min(var(--width), var(--height)) - var(--padding) * 2);
+            height: calc(min(var(--width), var(--height)) - var(--padding) * 2);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+            circle {
+                animation: dash 4s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+                stroke: inherit;
+                transform-origin: center;
+            }
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash {
+
+            0%,
+            25%,
+            50%,
+            75%,
+            100% {
+                stroke-dasharray: 15%, 10000%;
+            }
+
+            12.5%,
+            37.5%,
+            62.5%,
+            87.5% {
+                stroke-dasharray: 228%, 10000%;
+                transform: rotate(90deg*0);
+            }
+
+            25%,
+            37.5% {
+                transform: rotate(90deg*3);
+            }
+
+            50%,
+            62.5% {
+                transform: rotate(90deg*6);
+            }
+
+            75%,
+            87.5% {
+                transform: rotate(90deg*9);
+            }
+
+            100% {
+                transform: rotate(90deg*12);
+            }
+        }
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

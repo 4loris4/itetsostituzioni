@@ -1,0 +1,36 @@
+{
+    "name": "itetsostituzioni",
+    "version": "1.0.0",
+    "description": "Sito web da cui poter vedere le sostituzioni dei professori dell'Istituto Pilati. Creato con React",
+    "scripts": {
+        "dev": "webpack-dev-server --config=webpack.dev.js",
+        "prod": "webpack --config=webpack.prod.js"
+    },
+    "author": "4loris4",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jquery": "^3.5.1",
+        "@types/react": "^16.9.49",
+        "@types/react-dom": "^16.9.8",
+        "concurrently": "^5.2.0",
+        "css-loader": "1.0.1",
+        "file-loader": "^6.0.0",
+        "html-webpack-plugin": "^4.3.0",
+        "mini-css-extract-plugin": "^0.10.0",
+        "remove-files-webpack-plugin": "^1.4.3",
+        "sass": "^1.26.10",
+        "sass-loader": "^9.0.3",
+        "style-loader": "^1.2.1",
+        "ts-loader": "^8.0.1",
+        "typescript": "^3.9.7",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0",
+        "webpack-merge": "^5.1.2"
+    },
+    "dependencies": {
+        "jquery": "^3.5.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    }
+}

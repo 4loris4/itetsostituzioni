@@ -1,0 +1,39 @@
+#selectView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+
+    * {
+        max-width: 300px;
+    }
+
+    h1 {
+        margin: 16px;
+    }
+
+    p:nth-of-type(2) {
+        font-size: 14px;
+        margin: 8px 0 32px 0;
+    }
+
+    button {
+        appearance: none;
+        border: none;
+        outline: none;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        background: #e0e0e0;
+        width: 200px;
+        height: 40px;
+        margin-bottom: 8px;
+        font-weight: bold;
+        transition: background-color 100ms ease;
+
+        &:hover {
+            background: #d0d0d0;
+            cursor: pointer;
+        }
+    }
+}

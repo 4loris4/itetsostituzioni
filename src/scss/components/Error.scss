@@ -1,0 +1,23 @@
+#error {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 50;
+    text-align: center;
+
+    p {
+        max-width: 300px;
+    }
+
+    p:first-child {
+        font-weight: bold;
+        margin: 4px;
+    }
+}
