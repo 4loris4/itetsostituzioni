@@ -2,7 +2,7 @@
   "name": "itetsostituzioni",
   "private": true,
   "version": "2.0.0",
-  "description": "Sito web da cui poter vedere le sostituzioni dei professori dell'Istituto Pilati. Creato con React",
+  "description": "Sito web da cui poter visualizzare le sostituzioni dei professori dell'Istituto Pilati.",
   "type": "module",
   "scripts": {
     "dev": "vite",
