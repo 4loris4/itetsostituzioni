@@ -1,0 +1,45 @@
+.iconButton {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  background: none;
+
+  svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    font-size: 1.5rem;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: background-color 150ms, border-color 250ms 150ms;
+  }
+
+  &:not(:disabled) {
+    &:active::before {
+      transition: none;
+      border: 0px solid var(--hover);
+      background-color: var(--hover);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--hover);
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}

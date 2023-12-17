@@ -1,0 +1,12 @@
+.substitutionTile {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 1rem;
+  height: 4.5rem;
+  gap: .25rem;
+
+  .count {
+    font-size: .9rem;
+  }
+}
