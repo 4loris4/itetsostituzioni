@@ -1,12 +1,35 @@
 .substitutionTile {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0 1rem;
+  padding: 0 1rem;
   height: 4.5rem;
   gap: .25rem;
+  width: 100%;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 
   .count {
     font-size: .9rem;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--hover);
+  }
+
+  &:active::before {
+    background: var(--hover);
   }
 }

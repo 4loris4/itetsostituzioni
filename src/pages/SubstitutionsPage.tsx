@@ -1,9 +1,14 @@
 import { DateTime } from "luxon";
+import { MdSettings } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Header from "../components/Header";
 import DetailsTile from "../components/substitutions/DetailsTile";
 import SubstitutionTile from "../components/substitutions/SubstitutionTile";
 import { useFetch } from "../fetch";
+import FullscreenDetails from "../ui/FullscreenDetails";
+import IconButton from "../ui/IconButton";
+import Loader from "../ui/Loader";
 
 const substitutionsSchema = z.object({
   data: z.string().transform((date) => DateTime.fromJSDate(new Date(date.split("/").reverse().join("/")))),
@@ -21,7 +26,8 @@ const substitutionsSchema = z.object({
 
 export type SubstitutionsData = z.infer<typeof substitutionsSchema>;
 
-export default function Substitutions() {
+export default function SubstitutionsPage() {
+  const navigate = useNavigate();
   const substitutions = useFetch("http://itetsostituzionitest.altervista.org/sostituzioni/listaPubblica.php", substitutionsSchema); //TODO change url
 
   const groupSubstitutions = (substitutions: SubstitutionsData["sostituzioni"]): Map<string, SubstitutionsData["sostituzioni"]> => {
@@ -45,7 +51,10 @@ export default function Substitutions() {
   };
 
   return (<>
-    <Header date={substitutions.data?.data} />
+    <Header
+      title={substitutions.data?.data.setLocale("it").toFormat("'Sostituzioni di' cccc d LLLL") ?? "ITET Sostituzioni"}
+      actions={<IconButton icon={MdSettings} title="Impostazioni" onClick={() => navigate("/settings")} />}
+    />
     <main>
       {substitutions.when({
         //TODO handle empty...
@@ -58,8 +67,8 @@ export default function Substitutions() {
             <DetailsTile title="ITP" /> {/* //TODO itp */}
           </>);
         },
-        loading: () => <p>loading</p>, //TODO
-        error: (e) => <p>error {e.message}</p> //TODO
+        loading: () => <Loader />,
+        error: () => <FullscreenDetails title="Impossibile scaricare le sostituzioni" subtitle="Riprova più tardi" isError />
       })}
     </main>
   </>);

@@ -1,19 +1,21 @@
-import { DateTime } from "luxon";
-import { MdSettings } from "react-icons/md";
 import styles from "./Header.module.scss";
-import IconButton from "./IconButton";
 
 type Props = {
-  date?: DateTime,
+  leading?: React.ReactNode,
+  title: string,
+  actions?: React.ReactNode;
 };
 
-export default function Header({ date }: Props) {
+export default function Header({ leading, title, actions }: Props) {
   return (
     <header className={styles.appBar}>
-      <span>{date?.setLocale("it").toFormat("'Sostituzioni di' cccc d LLLL") ?? "ITET Sostituzioni"}</span>
-      <div className="actions">
-        <IconButton icon={MdSettings} title="Impostazioni" />
+      <div className={styles.title}>
+        {leading}
+        <span>{title}</span>
       </div>
+      {actions &&
+        <div className={styles.actions}>{actions}</div>
+      }
     </header>
   );
 }

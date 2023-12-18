@@ -1,4 +1,5 @@
-import { SubstitutionsData } from "../../pages/Substitutions";
+import { useNavigate } from "react-router-dom";
+import { SubstitutionsData } from "../../pages/SubstitutionsPage";
 import styles from "./SubstitutionTile.module.scss";
 
 type Props = {
@@ -7,10 +8,12 @@ type Props = {
 };
 
 export default function SubstitutionTile({ user, substitutions }: Props) { //TODO open details
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.substitutionTile}> {/* //TODO teacher or student */}
+    <button className={styles.substitutionTile} onClick={() => navigate("/details", { state: { user, substitutions } })}> {/* //TODO teacher or student */}
       <span>{user}</span>
       <span className={styles.count}>{substitutions.length} {substitutions.length == 1 ? "sostituzione" : "sostituzioni"}</span>
-    </div>
+    </button>
   );
 }

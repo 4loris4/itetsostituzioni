@@ -3,18 +3,23 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.scss";
-import Settings from "./pages/Settings";
-import Substitutions from "./pages/Substitutions";
-import Welcome from "./pages/Welcome";
+import DetailsPage from "./pages/DetailsPage";
+import SettingsPage from "./pages/SettingsPage";
+import SubstitutionsPage from "./pages/SubstitutionsPage";
+import WelcomePage from "./pages/WelcomePage";
 
-const router = createBrowserRouter([ //TODO remove router?
+const router = createBrowserRouter([
   {
     path: "/",
-    element: true ? <Substitutions /> : <Welcome />, //TODO
+    element: true ? <SubstitutionsPage /> : <WelcomePage />, //TODO
+  },
+  {
+    path: "/details",
+    element: <DetailsPage />,
   },
   {
     path: "/settings",
-    element: <Settings />,
+    element: <SettingsPage />,
   },
   {
     path: "/*",

@@ -13,21 +13,41 @@
 }
 
 :root {
-  --primary: #263238;
+  --app-bar: #263238;
+  --primary: #2196F3;
   --on-primary: #FFFFFF;
   --surface: #212121;
   --on-surface: #FFFFFF;
   --hover: #FFFFFF1A;
+  --border: #313131;
 }
 
 :root[theme="light"] {
-  --primary: #90CAF9;
+  --app-bar: #90CAF9;
+  --primary: #1565C0;
   --on-primary: #000000;
   --surface: #FFFFFF;
   --on-surface: #000000;
   --hover: #0000001A;
+  --border: #E2E2E2;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root,
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   background-color: var(--surface);
+}
+
+main {
+  flex: 1;
 }
