@@ -10,6 +10,7 @@
   z-index: 10;
   flex-shrink: 0;
   gap: .5rem;
+  transition: background-color 200ms linear;
 
   .title {
     flex: 1;

@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { MdPermIdentity, MdSettings, MdToggleOff, MdToggleOn } from "react-icons/md";
+import { MdPermIdentity, MdSettings, MdSunny, MdToggleOff, MdToggleOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { substitutionsUrl } from "../Constants";
@@ -11,6 +11,7 @@ import FullscreenDetails from "../components/ui/FullscreenDetails";
 import IconButton from "../components/ui/IconButton";
 import Loader from "../components/ui/Loader";
 import useFetch from "../hooks/useFetch";
+import useTheme from "../providers/ThemeProvider";
 import useUser, { UserType } from "../providers/UserProvider";
 
 const substitutionsSchema = z.object({
@@ -31,6 +32,7 @@ export type SubstitutionsData = z.infer<typeof substitutionsSchema>;
 
 export default function SubstitutionsPage() {
   const { user, setType } = useUser();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const substitutions = useFetch(substitutionsUrl, substitutionsSchema);
 
@@ -58,6 +60,7 @@ export default function SubstitutionsPage() {
     <Header
       title={substitutions.data?.data.setLocale("it").toFormat("'Sostituzioni di' cccc d LLLL") ?? "ITET Sostituzioni"}
       actions={<>
+        <IconButton icon={MdSunny} title={"Theme"} onClick={() => setTheme(theme == "light" ? "dark" : theme == "dark" ? "device" : "light")} /> {/* //TODO remove */}
         <IconButton icon={user.isTeacher ? MdToggleOff : MdToggleOn} title={user.isTeacher ? "Teacher" : "Student"} onClick={() => setType(user.isTeacher ? UserType.student : UserType.teacher)} /> {/* //TODO remove */}
         <IconButton icon={MdSettings} title="Impostazioni" onClick={() => navigate("/settings")} />
       </>}

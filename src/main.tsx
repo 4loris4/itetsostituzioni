@@ -7,6 +7,7 @@ import DetailsPage from "./pages/DetailsPage";
 import SettingsPage from "./pages/SettingsPage";
 import SubstitutionsPage from "./pages/SubstitutionsPage";
 import WelcomePage from "./pages/WelcomePage";
+import { ThemeProvider } from "./providers/ThemeProvider";
 import useUser, { UserProvider } from "./providers/UserProvider";
 
 //TODO meta description
@@ -54,9 +55,11 @@ function Router() {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <UserProvider>
-      <QueryClientProvider client={new QueryClient()}>
-        <Router />
-      </QueryClientProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={new QueryClient()}>
+          <Router />
+        </QueryClientProvider>
+      </ThemeProvider>
     </UserProvider>
   </React.StrictMode>,
 );

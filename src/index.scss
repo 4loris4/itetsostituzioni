@@ -23,7 +23,7 @@
   --button: #161A1D;
 }
 
-:root[theme="light"] {
+:root[data-theme="light"] {
   --app-bar: #90CAF9;
   --primary: #1565C0;
   --on-primary: #000000;
@@ -48,6 +48,7 @@ main {
 
 body {
   background-color: var(--surface);
+  transition: background-color 200ms linear;
 }
 
 main {
