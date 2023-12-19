@@ -3,8 +3,8 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
+import IconButton from "../components/ui/IconButton";
 import useUser from "../providers/UserProvider";
-import IconButton from "../ui/IconButton";
 import { SubstitutionsData } from "./SubstitutionsPage";
 
 export type DetailsPageState = {

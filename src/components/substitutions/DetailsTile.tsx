@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import CollapsibleDiv from "../../ui/CollapsibleDiv";
+import CollapsibleDiv from "../ui/CollapsibleDiv";
 import styles from "./DetailsTile.module.scss";
 
 type Props = {

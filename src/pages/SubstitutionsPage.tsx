@@ -7,11 +7,11 @@ import Header from "../components/Header";
 import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
 import SubstitutionTile from "../components/substitutions/SubstitutionTile";
+import FullscreenDetails from "../components/ui/FullscreenDetails";
+import IconButton from "../components/ui/IconButton";
+import Loader from "../components/ui/Loader";
 import useFetch from "../hooks/useFetch";
 import useUser, { UserType } from "../providers/UserProvider";
-import FullscreenDetails from "../ui/FullscreenDetails";
-import IconButton from "../ui/IconButton";
-import Loader from "../ui/Loader";
 
 const substitutionsSchema = z.object({
   data: z.string().transform((date) => DateTime.fromJSDate(new Date(date.split("/").reverse().join("/")))),

@@ -1,5 +1,5 @@
+import Button from "../components/ui/Button";
 import useUser, { UserType } from "../providers/UserProvider";
-import Button from "../ui/Button";
 import styles from "./WelcomePage.module.scss";
 
 export default function WelcomePage() {

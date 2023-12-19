@@ -1,7 +1,7 @@
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import IconButton from "../ui/IconButton";
+import IconButton from "../components/ui/IconButton";
 
 export default function SettingsPage() { //TODO settings
   const navigate = useNavigate();
