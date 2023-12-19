@@ -3,22 +3,15 @@
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 1rem;
-  min-height: 3.5rem;
-  font-size: 1.25rem;
+  height: 3.5rem;
   background-color: var(--app-bar);
   color: var(--on-primary);
   z-index: 10;
+  flex-shrink: 0;
+  gap: .5rem;
 
   .title {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-  }
-
-  .actions {
-    display: flex;
-    gap: .5rem;
+    flex: 1;
   }
 }

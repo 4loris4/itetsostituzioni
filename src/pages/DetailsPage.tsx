@@ -1,6 +1,7 @@
-import { MdArrowBack } from "react-icons/md";
+import { MdArrowBack, MdAssignment, MdClose, MdPermIdentity, MdPerson } from "react-icons/md";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
 import IconButton from "../ui/IconButton";
 import { SubstitutionsData } from "./SubstitutionsPage";
@@ -23,14 +24,19 @@ export default function DetailsPage() {
       <Header
         leading={<IconButton icon={MdArrowBack} title="Indietro" onClick={() => navigate("/")} />}
         title={`Sostituzione della classe ${user}`} //TODO user...
+        actions={<>
+          <IconButton icon={MdClose} title="Chiudi" onClick={() => navigate("/")} />
+          <IconButton icon={MdClose} title="Chiudi" onClick={() => navigate("/")} />
+          <IconButton icon={MdClose} title="Chiudi" onClick={() => navigate("/")} />
+        </>}
       />
       <main>
-        {substitutions.sort((a, b) => a.orario - b.orario).map(({ orario }, i) => (
-          <DetailsTile
-            key={i}
-            title={`${orario}° ora`}
-            subtitle={timetables[orario]}
-          />
+        {substitutions.sort((a, b) => a.orario - b.orario).map(({ orario, docenteAssente, docenteSostituto, note }, i) => ( //TODO user
+          <DetailsTile key={i} title={`${orario}° ora`} subtitle={timetables[orario]}>
+            <DetailsElement icon={MdPermIdentity} title={docenteAssente} trailing="Assente" />
+            <DetailsElement icon={MdPerson} title={docenteSostituto} trailing="Sostituto" />
+            <DetailsElement icon={MdAssignment} title={note} trailing="Note" />
+          </DetailsTile>
         ))}
       </main>
     </>);

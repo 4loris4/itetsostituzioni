@@ -1,8 +1,10 @@
 import { DateTime } from "luxon";
-import { MdSettings } from "react-icons/md";
+import { MdPermIdentity, MdSettings } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { substitutionsUrl } from "../Constants";
 import Header from "../components/Header";
+import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
 import SubstitutionTile from "../components/substitutions/SubstitutionTile";
 import { useFetch } from "../fetch";
@@ -28,7 +30,7 @@ export type SubstitutionsData = z.infer<typeof substitutionsSchema>;
 
 export default function SubstitutionsPage() {
   const navigate = useNavigate();
-  const substitutions = useFetch("http://itetsostituzionitest.altervista.org/sostituzioni/listaPubblica.php", substitutionsSchema); //TODO change url
+  const substitutions = useFetch(substitutionsUrl, substitutionsSchema);
 
   const groupSubstitutions = (substitutions: SubstitutionsData["sostituzioni"]): Map<string, SubstitutionsData["sostituzioni"]> => {
     const groups = new Map<string, SubstitutionsData["sostituzioni"]>();
@@ -64,7 +66,16 @@ export default function SubstitutionsPage() {
             {[...groupedSubstitutions.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([user, substitutions], i) => {
               return <SubstitutionTile key={i} user={user} substitutions={substitutions} />;
             })}
-            <DetailsTile title="ITP" /> {/* //TODO itp */}
+            {(data.itp1 != "" || data.itp2 != "") &&
+              <DetailsTile title="ITP">
+                {data.itp1 != "" &&
+                  <DetailsElement icon={MdPermIdentity} title={data.itp1} trailing="ITP Assenti" />
+                }
+                {data.itp2 != "" &&
+                  <DetailsElement icon={MdPermIdentity} title={data.itp2} trailing="Coperti da ITP" />
+                }
+              </DetailsTile>
+            }
           </>);
         },
         loading: () => <Loader />,

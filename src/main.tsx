@@ -8,10 +8,15 @@ import SettingsPage from "./pages/SettingsPage";
 import SubstitutionsPage from "./pages/SubstitutionsPage";
 import WelcomePage from "./pages/WelcomePage";
 
+//TODO meta description
+//TODO add link for playStore/reminder for pwa?
+//TODO layout for big devices?
+//TODO when opening substitutions on mobile, focus state is saved in other page
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: true ? <SubstitutionsPage /> : <WelcomePage />, //TODO
+    element: true ? <SubstitutionsPage /> : <WelcomePage />, //TODO condition
   },
   {
     path: "/details",

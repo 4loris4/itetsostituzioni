@@ -9,13 +9,9 @@ type Props = {
 export default function Header({ leading, title, actions }: Props) {
   return (
     <header className={styles.appBar}>
-      <div className={styles.title}>
-        {leading}
-        <span>{title}</span>
-      </div>
-      {actions &&
-        <div className={styles.actions}>{actions}</div>
-      }
+      {leading}
+      <span className={styles.title}>{title}</span>
+      {actions}
     </header>
   );
 }

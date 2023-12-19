@@ -1,0 +1,20 @@
+.detailsElement {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 2.75rem;
+  gap: .5rem;
+
+  svg {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    flex: 1;
+  }
+
+  .trailing {
+    font-size: .75rem;
+    font-weight: 500;
+  }
+}
