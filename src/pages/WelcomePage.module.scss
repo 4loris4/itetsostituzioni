@@ -1,0 +1,18 @@
+.welcomePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+
+  .content,
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+  .buttons {
+    gap: .5rem;
+  }
+}

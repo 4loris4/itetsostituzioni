@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { MdPermIdentity, MdSettings } from "react-icons/md";
+import { MdPermIdentity, MdSettings, MdToggleOff, MdToggleOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { substitutionsUrl } from "../Constants";
@@ -7,7 +7,8 @@ import Header from "../components/Header";
 import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
 import SubstitutionTile from "../components/substitutions/SubstitutionTile";
-import { useFetch } from "../fetch";
+import useFetch from "../hooks/useFetch";
+import useUser, { UserType } from "../providers/UserProvider";
 import FullscreenDetails from "../ui/FullscreenDetails";
 import IconButton from "../ui/IconButton";
 import Loader from "../ui/Loader";
@@ -29,6 +30,7 @@ const substitutionsSchema = z.object({
 export type SubstitutionsData = z.infer<typeof substitutionsSchema>;
 
 export default function SubstitutionsPage() {
+  const { user, setType } = useUser();
   const navigate = useNavigate();
   const substitutions = useFetch(substitutionsUrl, substitutionsSchema);
 
@@ -36,8 +38,8 @@ export default function SubstitutionsPage() {
     const groups = new Map<string, SubstitutionsData["sostituzioni"]>();
 
     for (const substitution of substitutions) {
-      const user = /* user.isTeacher ? substitution.docenteSostituto :  */substitution.classe; //TODO user
-      (groups.has(user) ? groups : groups.set(user, [])).get(user)!.push(substitution);
+      const key = user.isTeacher ? substitution.docenteSostituto : substitution.classe;
+      (groups.has(key) ? groups : groups.set(key, [])).get(key)!.push(substitution);
     }
 
     //If we have set a class, also add congregated substitutions for our class //TODO user.name
@@ -55,7 +57,10 @@ export default function SubstitutionsPage() {
   return (<>
     <Header
       title={substitutions.data?.data.setLocale("it").toFormat("'Sostituzioni di' cccc d LLLL") ?? "ITET Sostituzioni"}
-      actions={<IconButton icon={MdSettings} title="Impostazioni" onClick={() => navigate("/settings")} />}
+      actions={<>
+        <IconButton icon={user.isTeacher ? MdToggleOff : MdToggleOn} title={user.isTeacher ? "Teacher" : "Student"} onClick={() => setType(user.isTeacher ? UserType.student : UserType.teacher)} /> {/* //TODO remove */}
+        <IconButton icon={MdSettings} title="Impostazioni" onClick={() => navigate("/settings")} />
+      </>}
     />
     <main>
       {substitutions.when({
@@ -63,8 +68,8 @@ export default function SubstitutionsPage() {
         data: (data) => {
           const groupedSubstitutions = groupSubstitutions(data.sostituzioni);
           return (<>
-            {[...groupedSubstitutions.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([user, substitutions], i) => {
-              return <SubstitutionTile key={i} user={user} substitutions={substitutions} />;
+            {[...groupedSubstitutions.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([name, substitutions], i) => {
+              return <SubstitutionTile key={i} name={name} substitutions={substitutions} />;
             })}
             {(data.itp1 != "" || data.itp2 != "") &&
               <DetailsTile title="ITP">
