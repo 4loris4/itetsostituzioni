@@ -4,12 +4,14 @@
   padding: 0 1.5rem;
   border-radius: 1.5rem;
   font-size: .9rem;
+  font-weight: 500;
   color: var(--primary);
   background: none;
   border: none;
   outline: none;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 2px 2px var(--separator);
 
   &::before,
   &::after {

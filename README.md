@@ -1,3 +1,3 @@
 # ITET Sostituzioni
 
-Sito web da cui poter visualizzare le sostituzioni dei professori dell'Istituto Pilati.
+Web App dell'Istituto Pilati per le sostituzioni dei professori.

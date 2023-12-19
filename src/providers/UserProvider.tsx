@@ -42,7 +42,14 @@ export function UserProvider({ children }: Props) {
 
   return (
     <UserContext.Provider
-      value={{ user, setType, setName }}
+      value={{
+        user,
+        setType(type) {
+          setType(type);
+          setName(undefined);
+        },
+        setName
+      }}
       children={children}
     />
   );

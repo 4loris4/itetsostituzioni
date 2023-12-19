@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Button from "../components/ui/Button";
 import useUser, { UserType } from "../providers/UserProvider";
 import styles from "./WelcomePage.module.scss";
@@ -5,7 +6,10 @@ import styles from "./WelcomePage.module.scss";
 export default function WelcomePage() {
   const { setType } = useUser();
 
-  return (
+  return (<>
+    <Helmet>
+      <title>ITET Sostituzioni</title>
+    </Helmet>
     <main className={styles.welcomePage}>
       <h1>Benvenuto nell'app!</h1>
       <div className={styles.content}>
@@ -17,5 +21,5 @@ export default function WelcomePage() {
         <Button onClick={() => setType(UserType.student)}>Sono uno studente</Button>
       </div>
     </main>
-  );
+  </>);
 }

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { MdArrowBack, MdAssignment, MdPermIdentity, MdPerson, MdRoom } from "react-icons/md";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
@@ -23,6 +24,9 @@ export default function DetailsPage() {
     const { name, substitutions } = state!;
 
     return (<>
+      <Helmet>
+        <title>{name} - ITET Sostituzioni</title>
+      </Helmet>
       <Header
         leading={<IconButton icon={MdArrowBack} title="Indietro" onClick={() => navigate("/")} />}
         title={`Sostituzione ${user.isTeacher ? "di" : "della classe"} ${name}`}

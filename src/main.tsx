@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.scss";
 import DetailsPage from "./pages/DetailsPage";
@@ -10,12 +11,7 @@ import WelcomePage from "./pages/WelcomePage";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import useUser, { UserProvider } from "./providers/UserProvider";
 
-//TODO meta description
-//TODO add link for playStore/reminder for pwa?
 //TODO layout for big devices?
-//TODO when opening substitutions on mobile, focus state is saved in other page
-//TODO auto reload if data is stale?
-//TODO Head title
 
 function Router() {
   const { user } = useUser();
@@ -54,12 +50,14 @@ function Router() {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <UserProvider>
-      <ThemeProvider>
-        <QueryClientProvider client={new QueryClient()}>
-          <Router />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </UserProvider>
+    <HelmetProvider>
+      <UserProvider>
+        <ThemeProvider>
+          <QueryClientProvider client={new QueryClient()}>
+            <Router />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </UserProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 );

@@ -5,12 +5,14 @@ export default function useFetch<T extends z.ZodTypeAny>(url: string, schema?: T
   const query = useQuery<z.infer<T>>({
     queryKey: [url],
     queryFn: () => {
-      return fetch(url).then(response => response.json()).then((schema ?? z.any()).parse); //TODO uncomment
-      return new Promise((resolve) => {
+      return fetch(url).then(response => response.json()).then((schema ?? z.any()).parse);
+
+      //TODO remove
+      /* return new Promise((resolve) => {
         setTimeout(() => {
           resolve(fetch(url).then(response => response.json()).then((schema ?? z.any()).parse));
         }, 3000);
-      });
+      }); */
     },
   });
 

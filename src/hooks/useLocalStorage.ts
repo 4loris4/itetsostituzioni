@@ -5,7 +5,7 @@ export function useLocalStorage<T>(key: string): [T | undefined, React.Dispatch<
 export function useLocalStorage<T>(key: string, defaultValue?: T): [T | undefined, React.Dispatch<React.SetStateAction<T | undefined>>] {
   const [value, setValue] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem(key)!) as T;
+      return JSON.parse(localStorage.getItem(key)!) as T ?? defaultValue;
     }
     catch (_) {
       return defaultValue;
@@ -13,7 +13,12 @@ export function useLocalStorage<T>(key: string, defaultValue?: T): [T | undefine
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+    else {
+      localStorage.removeItem(key);
+    }
   }, [value]);
 
   return [value, setValue];

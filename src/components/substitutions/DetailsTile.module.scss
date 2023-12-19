@@ -69,7 +69,7 @@
 
   &.expanded {
     &::before {
-      border-color: var(--border);
+      border-color: var(--separator);
     }
 
     .tile .icon svg {
