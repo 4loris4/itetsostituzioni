@@ -13,11 +13,11 @@ export function useLocalStorage<T>(key: string, defaultValue?: T): [T | undefine
   });
 
   useEffect(() => {
-    if (value) {
-      localStorage.setItem(key, JSON.stringify(value));
+    if (value == undefined) {
+      localStorage.removeItem(key);
     }
     else {
-      localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify(value));
     }
   }, [value]);
 

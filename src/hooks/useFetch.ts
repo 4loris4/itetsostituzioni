@@ -4,6 +4,7 @@ import { z } from "zod";
 export default function useFetch<T extends z.ZodTypeAny>(url: string, schema?: T) {
   const query = useQuery<z.infer<T>>({
     queryKey: [url],
+    networkMode: "offlineFirst",
     queryFn: () => {
       return fetch(url).then(response => response.json()).then((schema ?? z.any()).parse);
 
