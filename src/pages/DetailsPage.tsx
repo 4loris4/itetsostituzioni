@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { MdArrowBack, MdAssignment, MdPermIdentity, MdPerson, MdRoom } from "react-icons/md";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import FullscreenDetails from "../components/FullscreenDetails";
 import Header from "../components/Header";
 import DetailsElement from "../components/substitutions/DetailsElement";
 import DetailsTile from "../components/substitutions/DetailsTile";
@@ -32,18 +33,23 @@ export default function DetailsPage() {
         title={`Sostituzione ${user.isTeacher ? "di" : "della classe"} ${name}`}
       />
       <main>
-        {substitutions.sort((a, b) => a.orario - b.orario).map(({ orario, docenteAssente, classe, docenteSostituto, note }, i) => (
-          <DetailsTile key={i} title={`${orario}° ora`} subtitle={timetables[orario - 1]}>
-            <DetailsElement icon={user.isTeacher ? MdPerson : MdPermIdentity} title={docenteAssente} trailing="Assente" />
-            {user.isTeacher ?
-              <DetailsElement icon={MdRoom} title={classe} trailing="Classe" /> :
-              <DetailsElement icon={MdPerson} title={docenteSostituto} trailing="Sostituto" />
-            }
-            {note != "" &&
-              <DetailsElement icon={MdAssignment} title={note} trailing="Note" />
-            }
-          </DetailsTile>
-        ))}
+        {substitutions.length == 0 ?
+          <FullscreenDetails title="Nessuna sostituzione trovata" subtitle={`Non sono previste sostituzioni per ${user.isTeacher ? "te" : "la tua classe"}!`} /> :
+          (
+            substitutions.sort((a, b) => a.orario - b.orario).map(({ orario, docenteAssente, classe, docenteSostituto, note }, i) => (
+              <DetailsTile key={i} title={`${orario}° ora`} subtitle={timetables[orario - 1]}>
+                <DetailsElement icon={user.isTeacher ? MdPerson : MdPermIdentity} title={docenteAssente} trailing="Assente" />
+                {user.isTeacher ?
+                  <DetailsElement icon={MdRoom} title={classe} trailing="Classe" /> :
+                  <DetailsElement icon={MdPerson} title={docenteSostituto} trailing="Sostituto" />
+                }
+                {note != "" &&
+                  <DetailsElement icon={MdAssignment} title={note} trailing="Note" />
+                }
+              </DetailsTile>
+            ))
+          )
+        }
       </main>
     </>);
   }

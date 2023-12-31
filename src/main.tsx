@@ -11,8 +11,6 @@ import WelcomePage from "./pages/WelcomePage";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import useUser, { UserProvider } from "./providers/UserProvider";
 
-//TODO layout for big devices?
-
 function Router() {
   const { user } = useUser();
 

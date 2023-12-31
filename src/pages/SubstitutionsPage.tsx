@@ -57,6 +57,23 @@ export default function SubstitutionsPage() {
     return groups;
   };
 
+  const sortSubstitutions = (substitutions: Map<string, SubstitutionsData["sostituzioni"]>): [name: string, substitutions: SubstitutionsData["sostituzioni"]][] => {
+    //If we have set a name, move that to the top (if not present, add with an empty array)
+    const personal = (() => {
+      if (user.name == undefined) return undefined;
+
+      const substitution = substitutions.get(user.name) ?? [];
+      substitutions.delete(user.name);
+      return substitution;
+    })();
+
+    const sorted = [...substitutions.entries()].sort(([a], [b]) => a.localeCompare(b));
+
+    if (personal != undefined) sorted.unshift([user.name!, personal]);
+
+    return sorted;
+  };
+
   const buildPage = ({ body, date, timestamp }: { body: React.ReactNode; date?: DateTime; timestamp?: string; }) => {
     return (<>
       <Helmet>
@@ -84,8 +101,8 @@ export default function SubstitutionsPage() {
         body: (groupedSubstitutions.size == 0 && itpEmpty) ?
           <FullscreenDetails title="Nessuna sostituzione trovata" subtitle="Non sono previste sostituzioni per questa giornata!" /> :
           (<>
-            {[...groupedSubstitutions.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([name, substitutions], i) => {
-              return <SubstitutionTile key={i} name={name} substitutions={substitutions} />;
+            {sortSubstitutions(groupedSubstitutions).map(([name, substitutions], i) => {
+              return <SubstitutionTile key={i} name={name} substitutions={substitutions} personal={name == user.name} />;
             })}
             {!itpEmpty &&
               <DetailsTile title="ITP">
