@@ -1,0 +1,74 @@
+.spinner {
+  --size: 3rem;
+  --padding: 0rem;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  padding: var(--padding);
+  stroke: var(--primary);
+
+  svg {
+    position: absolute;
+    animation: rotate 2s linear infinite;
+    transform-origin: center center;
+    width: calc(min(var(--size), var(--size)) - var(--padding) * 2);
+    height: calc(min(var(--size), var(--size)) - var(--padding) * 2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    overflow: visible;
+
+    circle {
+      animation: dash 5s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+      transform-origin: center;
+      stroke: inherit;
+      stroke-width: calc(var(--size) / 9.6);
+    }
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+
+    0%,
+    25%,
+    50%,
+    75%,
+    100% {
+      stroke-dasharray: 15%, 10000%;
+    }
+
+    12.5%,
+    37.5%,
+    62.5%,
+    87.5% {
+      stroke-dasharray: 228%, 10000%;
+      transform: rotate(90deg*0);
+    }
+
+    25%,
+    37.5% {
+      transform: rotate(90deg*3);
+    }
+
+    50%,
+    62.5% {
+      transform: rotate(90deg*6);
+    }
+
+    75%,
+    87.5% {
+      transform: rotate(90deg*9);
+    }
+
+    100% {
+      transform: rotate(90deg*12);
+    }
+  }
+}
